@@ -1,0 +1,6 @@
+[build]
+command = "uv run task build"
+publish = "output"
+
+[build.environment]
+PYTHON_VERSION = "3.12"

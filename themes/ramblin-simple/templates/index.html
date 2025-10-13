@@ -1,0 +1,8 @@
+{% extends "base.html" %}
+{% block content %}
+  {% for page in pages %}
+    <article>
+      {{ page.content }}
+    </article>
+  {% endfor %}
+{% endblock %}
