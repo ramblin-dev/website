@@ -1,5 +1,5 @@
 [build]
-command = "uv run task build"
+command = "./uv-shim.sh"
 publish = "output"
 
 [build.environment]
