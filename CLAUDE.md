@@ -6,6 +6,10 @@ Source for the ramblin.dev website. Static site built with [Pelican](https://get
 
 ramblin.dev is a software studio founded and currently solely owned by Ivan VenOsdel. It is a home for small, independent software projects intended to cross-promote each other and collectively fund continued development.
 
+### The name
+
+"Ramblin'" is the old American sense of the word: a freedom of travel, movement, and living — surviving through informal exchange of effort within a community (think Depression-era ramblers, the Guthrie/folk tradition of trading work, songs, and shelter on the road). ramblin.dev applies that same spirit to creative work: a **freedom to make what we wish for others, and receive in kind** from a community doing the same. This is the load-bearing metaphor behind the project. Preserve it when editing copy — don't reduce "ramblin'" to a generic "wandering" or treat it as just an aesthetic. The community-exchange dimension is the whole point.
+
 Core principles (these should be reflected in site copy and product decisions):
 
 - **Pro-social bias.** Projects should skew toward things that are good for people — fostering genuine human connection, supporting mental health, FOSS, transparency, etc. Concrete preferences that fall under this umbrella:

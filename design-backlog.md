@@ -15,6 +15,7 @@ The current `content/pages/index.md` is a two-sentence stub. Replace with copy d
 
 **Must cover:**
 - Founded and solely run (today) by Ivan VenOsdel; a home for his independent software ideas.
+- **The name.** Short version of what "ramblin'" means here — the old American sense of freedom-through-community-exchange (Depression-era / folk-tradition connotation), applied to creative work. One or two sentences; the longer treatment lives on `/vision`.
 - The intent that these projects cross-promote each other and collectively fund ongoing development.
 - Default funding model: premium subscriptions/licenses and voluntary support (GitHub Sponsors, Patreon, etc.) of a specific product or of ramblin.dev itself.
 - The kinds of apps and sites Ivan personally likes to build — **pro-social**: things that foster human connection, support mental health, lean FOSS/transparent, and treat the user as the customer rather than the product (i.e., avoiding ad targeting, data resale, attention farming). Framed here as a description of Ivan's taste, *not* a company-wide rule a future creator would be bound to — the broader policy framing belongs on `/vision`.
@@ -31,10 +32,12 @@ The current `content/pages/index.md` is a two-sentence stub. Replace with copy d
 A dedicated page for the aspirational picture of ramblin.dev as a multi-creator framework. The landing page links to it; it isn't the first thing a visitor reads.
 
 **Must cover:**
+- **The name, full treatment.** The "ramblin'" origin — old American sense of freedom-through-community-exchange (Depression-era ramblers, the Guthrie/folk tradition of trading work, songs, and shelter). ramblin.dev as the same spirit applied to creative work: freedom to make what we wish for others and receive in kind. This is the load-bearing metaphor; everything else on the page is an expression of it.
 - Equitable profit-sharing plan, organized around the canonical short framing: **creators first, ramblin.dev second, individual upside third.**
 - Core-company pay-ratio cap: no core-company employee earns more than 4x the lowest-paid core-company employee, measured across pay + benefits + equity. No loopholes. Scoped to the company itself — does not bound what a creator earns from their own project.
 - Pro-social bias as the company-level project-selection preference (the version of the pro-social paragraph that's about *what kinds of projects ramblin.dev as a whole takes on*, not just Ivan's personal taste). Strong preference for the user-is-the-customer model; framed as a bias, not an absolute bar, so an edge-case creator isn't excluded.
 - Honest framing that this is the plan, not the current state — ramblin.dev is solo today.
+- **Epigraph (approved):** the Woody Guthrie quote from his 1942 notebook — *"all a human being is, anyway, is just a hoping machine, a working machine."* Primary-source verified (held by the Woody Guthrie Center; reproduced on the official Woody Guthrie site). Place at the top of `/vision`, attributed to Guthrie with the year (1942).
 
 **Decided:**
 - **Foreground the aspirational plan, with specifics framed as examples.** Pattern: state the principle plainly, illustrate with hedged examples ("might," "for example," "to give a concrete picture"), then explicitly separate the layers — *mechanics illustrative, principle settled*. This way the numbers can change later without breaking a promise.
@@ -54,8 +57,6 @@ A dedicated page for the aspirational picture of ramblin.dev as a multi-creator 
 > 3. **Individual upside third.** Once the people and the platform are taken care of, the creator who brought the success in keeps the rest. Getting rich is fine — it just comes after the first two.
 >
 > To give a concrete picture of the kind of mechanics I mean: a "comfortable living" threshold might be defined per creator (cost of living varies a lot), and a runaway hit might route some portion of its profits into the shared creator pool and into ramblin.dev itself before the rest flows back to the originating creator. The core company would be structured along the same lines — for example, a 4x cap between the highest- and lowest-paid core-company employee, across pay, benefits, and equity — so the same priority order is built into how ramblin.dev itself runs.
->
-> Numbers and mechanics like those are illustrative, not settled. The order of priorities is.
 
 ## 3. Email signup for updates
 
