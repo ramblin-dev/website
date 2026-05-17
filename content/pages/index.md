@@ -20,7 +20,7 @@ ramblin.dev is a home for small, independent software projects. Right now it's j
 
 ## What ramblin.dev is
 
-The projects here lean pro-social: things that bring people together, support mental health, and lean toward FOSS and transparent development.
+The projects here lean pro-social: things that bring people together, support mental health, and lean toward free and open source software (FOSS) and transparent development.
 
 Paid products are funded by subscriptions or licenses. Everything else is supported voluntarily through GitHub Sponsors, Patreon, and the like. The people who use the software are the customers, not the product.
 
