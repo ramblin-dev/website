@@ -19,7 +19,7 @@ The current `content/pages/index.md` is a two-sentence stub. Replace with copy d
 - Default funding model: premium subscriptions/licenses and voluntary support (GitHub Sponsors, Patreon, etc.) of a specific product or of ramblin.dev itself.
 - The kinds of apps and sites Ivan personally likes to build — **pro-social**: things that foster human connection, support mental health, lean FOSS/transparent, and treat the user as the customer rather than the product (i.e., avoiding ad targeting, data resale, attention farming). Framed here as a description of Ivan's taste, *not* a company-wide rule a future creator would be bound to — the broader policy framing belongs on `/vision`.
 - A one-line pointer to `/vision` for readers who want the longer-term picture.
-- Mailing-list signup (see section 3).
+- **Mailing-list signup, prominently placed.** This is the most visible call-to-action on the landing page — not tucked into the footer, not on a separate `/subscribe` page. Details in section 3.
 - Projects list or pointer to `/projects` (see section 4).
 
 **Decided:**
@@ -66,7 +66,7 @@ Collect emails for periodic updates. Socials can come later; email is enough for
 - **Form integration.** Static-site-friendly options: Netlify Forms (since we're already on Netlify) posting to a webhook into the chosen provider, or the provider's own embeddable form. Avoid heavy JS widgets.
 - **What we promise subscribers.** Cadence (monthly? on-launch only?), content (new projects, behind-the-scenes, etc.), and an explicit "your email won't be sold or used for ad targeting" line near the form.
 - **Confirmation flow.** Double opt-in by default.
-- **Where the form lives.** Bottom of landing page, dedicated `/subscribe` page, or both.
+- ~~**Where the form lives.**~~ **Decided:** prominently on the landing page itself — the most visible CTA, not a footer afterthought, not on a separate `/subscribe` page.
 
 **Out of scope for v1:** segmenting lists, transactional email, drip sequences.
 
