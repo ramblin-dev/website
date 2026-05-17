@@ -1,0 +1,7 @@
+{% extends "base.html" %}
+{% block title %}{% if page.title and page.title != SITENAME %}{{ page.title }} — {{ SITENAME }}{% else %}{{ SITENAME }}{% endif %}{% endblock %}
+{% block content %}
+  <article>
+    {{ page.content }}
+  </article>
+{% endblock %}

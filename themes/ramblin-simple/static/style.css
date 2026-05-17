@@ -72,6 +72,86 @@ footer a:hover {
   color: #0093e6;
 }
 
+/* Signup form */
+.signup-form {
+  border: 1px solid rgba(16, 106, 115, 0.3);
+  background-color: rgba(16, 106, 115, 0.05);
+  padding: 1.2rem 1.4rem;
+  border-radius: 6px;
+  margin: 1.5rem 0 2.5rem;
+}
+
+@media (prefers-color-scheme: dark) {
+  .signup-form {
+    background-color: rgba(16, 106, 115, 0.15);
+    border-color: rgba(16, 106, 115, 0.5);
+  }
+}
+
+.signup-honeypot {
+  position: absolute;
+  left: -9999px;
+}
+
+.signup-label {
+  display: block;
+  font-weight: 600;
+  margin-bottom: 0.6rem;
+  color: #106a73;
+}
+
+.signup-row {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.signup-row input[type="email"] {
+  flex: 1 1 220px;
+  padding: 0.5rem 0.7rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 1rem;
+  background-color: #fff;
+  color: #1e1e1e;
+}
+
+@media (prefers-color-scheme: dark) {
+  .signup-row input[type="email"] {
+    background-color: #2a2a2a;
+    color: #ddd;
+    border-color: #444;
+  }
+}
+
+.signup-row button {
+  padding: 0.5rem 1rem;
+  background-color: #106a73;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  font-size: 1rem;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.signup-row button:hover {
+  background-color: #0d5560;
+}
+
+.signup-note {
+  font-size: 0.85em;
+  color: #666;
+  margin-top: 0.7rem;
+  margin-bottom: 0;
+}
+
+@media (prefers-color-scheme: dark) {
+  .signup-note {
+    color: #999;
+  }
+}
+
 /* Optional: soft fade-in animation */
 body {
   opacity: 0;

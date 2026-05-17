@@ -1,6 +1,9 @@
+import datetime
+
 AUTHOR = 'Ivan VenOsdel'
 SITENAME = 'ramblin.dev'
 SITEURL = ""
+SITEYEAR = datetime.date.today().year
 THEME = "themes/ramblin-simple"
 
 THEME_STATIC_DIR = 'theme'
