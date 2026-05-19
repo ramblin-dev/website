@@ -25,7 +25,7 @@ Keep these intact when editing copy. If the user asks for shorter/punchier wordi
 ## Site structure
 
 - **`/` (landing, `content/pages/index.md`)** — what ramblin.dev is *today*: solo Ivan, his independent software projects, the mailing-list signup, the projects list. Plain-spoken, scannable. The pro-social bullet on this page is framed as *Ivan's personal taste in what to build*, not a policy that would bind a future creator.
-- **`/vision`** (working title; may end up `/vision-and-principles`) — long-term plans: the equitable profit-sharing priority stack, the core-company pay-ratio cap, the company-level pro-social project-selection bias. Linked from the landing page; deliberately not the first thing a visitor reads.
+- **`/about`** — broader picture of ramblin.dev: the name, the long-term plans (equitable profit-sharing priority stack, core-company pay-ratio cap), the kinds of projects Ivan wants to build, and how to help. Linked from the landing page; deliberately not the first thing a visitor reads.
 
 When editing copy, keep this split intact — don't pull aspirational/multi-creator material onto the landing page, and don't reduce the landing-page pro-social paragraph to bare personal preference without the substance (user-as-customer, FOSS, human connection, mental health).
 

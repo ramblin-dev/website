@@ -1,6 +1,6 @@
 Title: ramblin.dev
 Date: 2025-09-03
-Modified: 2026-05-16
+Modified: 2026-05-18
 Category: general
 save_as: index.html
 URL:
@@ -18,10 +18,14 @@ ramblin.dev is a home for small, independent software projects. Right now it's j
   <p class="signup-note">No spam. Your email won't be sold or used for ad targeting. Unsubscribe anytime.</p>
 </form>
 
+## Out so far
+
+[Rural Hide + Seek](https://ruralhs.ramblin.dev/) — an unofficial fan adaptation of *Jet Lag: The Game*'s Hide + Seek for rural areas where public transit is thin or absent. Auto-generates a map of "vehicle stations" and uses dice rolls to mimic transit pacing, so the game still works without buses and trains.
+
 ## What ramblin.dev is
 
 The projects here lean pro-social: things that bring people together, support mental health, and lean toward free and open source software (FOSS) and transparent development.
 
 Paid products are funded by subscriptions or licenses. Everything else is supported voluntarily through GitHub Sponsors, Patreon, and the like. The people who use the software are the customers, not the product.
 
-See [the vision page](/vision/) for the longer-term plan to bring other creators in and share the upside.
+See [the about page](/about/) for more on the name, the long-term plan, and how to help.
