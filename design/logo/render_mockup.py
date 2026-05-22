@@ -37,15 +37,16 @@ PANELS = [
     ("Satisfy capital R", "Satisfy", "Ramblin"),
 ]
 
-# Placeholder palette: "ramblin", "dev", and their blend (the shared dot).
-COL_RAMBLIN = "#DD6B4A"
-COL_DEV = "#3E9D63"
-COL_DOT = "#9A8347"
+# Palette: "ramblin" / road, "dev", and the shared dot.
+COL_RAMBLIN = "#E03A4C"  # heart red
+COL_DEV = "#3E9D63"      # green
+COL_DOT = "#424248"      # dark grey
 
 # Layout constants (SVG px)
 X0 = 90            # left margin of the word
 R = 132            # "ramblin" cap size
 DEV = 84           # "dev" size
+DEV_ROTATE = -12   # "dev" rotation in degrees (negative = counter-clockwise)
 PANEL_H = 372
 BASE0 = 320        # baseline of the first panel
 TRAIL_W = R * 0.0340  # weight of the return path (lighter than the lettering)
@@ -96,10 +97,11 @@ class Word:
                 return x + self.hmtx[gname][0]
         return self.advance
 
-    def outline_group(self, x_svg, baseline, size, color):
+    def outline_group(self, x_svg, baseline, size, color, rotate=0):
         scale = size / self.upm
+        rot = f" rotate({rotate})" if rotate else ""
         parts = [
-            f'<g transform="translate({x_svg:.2f} {baseline:.2f}) '
+            f'<g transform="translate({x_svg:.2f} {baseline:.2f}){rot} '
             f'scale({scale:.6f} {-scale:.6f})" fill="{color}">'
         ]
         for _, gname, x in self.glyphs:
@@ -252,7 +254,7 @@ def panel(label, ttf, text, base):
     # "dev": baseline sits at the dot, reading to its right.
     dev = Word(ttf, "dev")
     dev_x = dot_cx + dot_r + 10
-    g_dev = dev.outline_group(dev_x, dot_cy, DEV, COL_DEV)
+    g_dev = dev.outline_group(dev_x, dot_cy, DEV, COL_DEV, rotate=DEV_ROTATE)
 
     # Trailing path: from the n's right tip, under the word, into the R's leg tip.
     def to_svg(pt):
