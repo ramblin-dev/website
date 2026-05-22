@@ -2,14 +2,14 @@
 # requires-python = ">=3.10"
 # dependencies = ["fonttools>=4.50"]
 # ///
-"""Render the ramblin.dev logo: a clean logo.svg and a review mockup.
+"""Render the ramblin.dev wordmark: a clean wordmark.svg and a review mockup.
 
 Downloads the Google Fonts it needs and bakes the lettering into the output
 SVGs as real vector outlines, so the result does not depend on the viewer
 fetching webfonts. Glyph metrics place "dev", the shared dot, and the trailing
-path precisely; logo.svg is cropped to the artwork's computed bounding box.
+path precisely; wordmark.svg is cropped to the artwork's computed bounding box.
 
-Run:  uv run design/logo/render_logo.py
+Run:  uv run design/logo/render_wordmark.py
 """
 import math
 import os
@@ -22,8 +22,8 @@ from fontTools.pens.boundsPen import BoundsPen
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 CACHE = "/tmp/ramblin-logo-fonts"
-OUT = os.path.join(HERE, "mockup-script-composition.svg")
-OUT_LOGO = os.path.join(HERE, "logo.svg")
+OUT_MOCKUP = os.path.join(HERE, "wordmark-mockup.svg")
+OUT_WORDMARK = os.path.join(HERE, "wordmark.svg")
 
 # Kaushan Script is OFL-licensed; Satisfy and Yellowtail are Apache-2.0.
 # Both licenses permit modification.
@@ -56,7 +56,7 @@ TRAIL_END = 0.01       # the road's width at the R end, as a fraction of TRAIL_W
 TAPER_FROM = 0.2     # fraction of the road's length before the taper begins
 N_TIP_DY = -3         # nudge the n-end connection up (SVG px)
 R_FOOT_DY = 0         # nudge the R-leg connection down (SVG px)
-LOGO_MARGIN = 8       # px of breathing room around the cropped logo.svg
+WORDMARK_MARGIN = 8   # px of breathing room around the cropped wordmark.svg
 DOT_SHRINK = 2        # trim the dot radius by this many SVG px
 
 
@@ -339,16 +339,16 @@ def build():
         ttf = font_path(fname, FONTS[fname])
         panels.append(panel(label, ttf, text, BASE0 + i * PANEL_H))
 
-    # Review mockup: the logo on white, then again on a dark band so the
-    # white-rimmed dot can be checked against a dark background.
+    # Review mockup: the wordmark on white, then again on a dark band so the
+    # dot can be checked against a dark background.
     light_h = BASE0 + (len(PANELS) - 1) * PANEL_H + 220
     band_h = 320
     height = light_h + band_h
     _, by0, _, by1 = panels[0]["bbox"]
     band_dy = (light_h + band_h / 2) - (by0 + by1) / 2
 
-    mockup = f"""<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {width} {height}" role="img" aria-label="ramblin.dev logo composition mockup">
-  <title>ramblin.dev — logo composition mockup (real font outlines)</title>
+    mockup = f"""<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {width} {height}" role="img" aria-label="ramblin.dev wordmark mockup">
+  <title>ramblin.dev — wordmark mockup (real font outlines)</title>
   <defs>
     <style>
       .label {{ font-family: 'Helvetica Neue', Arial, sans-serif; font-size: 16px; fill: #9a9a9a; letter-spacing: 0.09em; }}
@@ -356,30 +356,30 @@ def build():
   </defs>
   <rect width="{width}" height="{height}" fill="#ffffff"/>
   <rect x="0" y="{light_h}" width="{width}" height="{band_h}" fill="#1e1e22"/>
-  <text x="{X0}" y="44" class="label" style="fill:#20424a;font-size:17px">ramblin.dev — logo composition mockup &#183; real font outlines, metric-placed</text>
+  <text x="{X0}" y="44" class="label" style="fill:#20424a;font-size:17px">ramblin.dev — wordmark mockup &#183; real font outlines, metric-placed</text>
   {"".join(chr(10) + "  " + p["labelled"] for p in panels)}
   <text x="{X0}" y="{light_h + 42:.0f}" class="label">ON A DARK BACKGROUND</text>
   <g transform="translate(0 {band_dy:.1f})">{panels[0]["logo"]}</g>
 </svg>
 """
-    with open(OUT, "w") as f:
+    with open(OUT_MOCKUP, "w") as f:
         f.write(mockup)
-    print(f"wrote {OUT}")
-    verify(OUT)
+    print(f"wrote {OUT_MOCKUP}")
+    verify(OUT_MOCKUP)
 
-    # Clean logo: cropped to its bounding box, transparent, no label or title.
+    # Clean wordmark: cropped to its bounding box, transparent, no label/title.
     x0, y0, x1, y1 = panels[0]["bbox"]
-    m = LOGO_MARGIN
+    m = WORDMARK_MARGIN
     view = f"{x0 - m:.1f} {y0 - m:.1f} {x1 - x0 + 2 * m:.1f} {y1 - y0 + 2 * m:.1f}"
-    logo_svg = f"""<svg xmlns="http://www.w3.org/2000/svg" viewBox="{view}" role="img" aria-label="ramblin.dev">
+    wordmark_svg = f"""<svg xmlns="http://www.w3.org/2000/svg" viewBox="{view}" role="img" aria-label="ramblin.dev">
   <title>ramblin.dev</title>
   {panels[0]["logo"]}
 </svg>
 """
-    with open(OUT_LOGO, "w") as f:
-        f.write(logo_svg)
-    print(f"wrote {OUT_LOGO}")
-    verify(OUT_LOGO)
+    with open(OUT_WORDMARK, "w") as f:
+        f.write(wordmark_svg)
+    print(f"wrote {OUT_WORDMARK}")
+    verify(OUT_WORDMARK)
 
 
 if __name__ == "__main__":

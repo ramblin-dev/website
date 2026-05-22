@@ -30,7 +30,7 @@ MANIFEST
 output/
 cache/
 
-# Generated logo SVGs (rebuild with: uv run design/logo/render_logo.py)
+# Generated wordmark SVGs (rebuild with: uv run design/logo/render_wordmark.py)
 design/logo/*.svg
 
 # PyInstaller
