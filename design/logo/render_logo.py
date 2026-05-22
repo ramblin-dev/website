@@ -2,14 +2,14 @@
 # requires-python = ">=3.10"
 # dependencies = ["fonttools>=4.50"]
 # ///
-"""Render the ramblin.dev script-composition mockup.
+"""Render the ramblin.dev logo: a clean logo.svg and a review mockup.
 
-Downloads three Google Fonts (OFL-licensed) and bakes the lettering into the
-output SVG as real vector outlines, so the result does not depend on the viewer
-fetching webfonts. Glyph metrics are used to place "dev", the shared dot, and
-the trailing path precisely instead of by eye.
+Downloads the Google Fonts it needs and bakes the lettering into the output
+SVGs as real vector outlines, so the result does not depend on the viewer
+fetching webfonts. Glyph metrics place "dev", the shared dot, and the trailing
+path precisely; logo.svg is cropped to the artwork's computed bounding box.
 
-Run:  uv run design/logo/render_mockup.py
+Run:  uv run design/logo/render_logo.py
 """
 import math
 import os
@@ -23,6 +23,7 @@ from fontTools.pens.boundsPen import BoundsPen
 HERE = os.path.dirname(os.path.abspath(__file__))
 CACHE = "/tmp/ramblin-logo-fonts"
 OUT = os.path.join(HERE, "mockup-script-composition.svg")
+OUT_LOGO = os.path.join(HERE, "logo.svg")
 
 # Kaushan Script is OFL-licensed; Satisfy and Yellowtail are Apache-2.0.
 # Both licenses permit modification.
@@ -37,10 +38,11 @@ PANELS = [
     ("Satisfy capital R", "Satisfy", "Ramblin"),
 ]
 
+
 # Palette: "ramblin" / road, "dev", and the shared dot.
 COL_RAMBLIN = "#E03A4C"  # heart red
 COL_DEV = "#3E9D63"      # green
-COL_DOT = "#424248"      # dark grey
+COL_DOT = "#7C7C82"      # mid grey — meant to read on both white and dark
 
 # Layout constants (SVG px)
 X0 = 90            # left margin of the word
@@ -54,6 +56,8 @@ TRAIL_END = 0.01       # the road's width at the R end, as a fraction of TRAIL_W
 TAPER_FROM = 0.2     # fraction of the road's length before the taper begins
 N_TIP_DY = -3         # nudge the n-end connection up (SVG px)
 R_FOOT_DY = 0         # nudge the R-leg connection down (SVG px)
+LOGO_MARGIN = 8       # px of breathing room around the cropped logo.svg
+DOT_SHRINK = 2        # trim the dot radius by this many SVG px
 
 
 def font_path(name, url):
@@ -203,7 +207,9 @@ def tapered_outline(samples, w_full, w_end, taper_from):
     d = f"M {left[0][0]:.2f} {left[0][1]:.2f} "
     d += " ".join(f"L {x:.2f} {y:.2f}" for x, y in left[1:])
     d += " " + " ".join(f"L {x:.2f} {y:.2f}" for x, y in reversed(right))
-    return d + " Z"
+    xs = [p[0] for p in left + right]
+    ys = [p[1] for p in left + right]
+    return d + " Z", (min(xs), min(ys), max(xs), max(ys))
 
 
 def trail_path(start, end, base):
@@ -229,6 +235,25 @@ def trail_path(start, end, base):
     return tapered_outline(samples, TRAIL_W, TRAIL_W * TRAIL_END, TAPER_FROM)
 
 
+def word_svg_bbox(word, x_svg, baseline, size, rotate=0):
+    """SVG-space bounding box of a word drawn via Word.outline_group."""
+    s = size / word.upm
+    a = math.radians(rotate)
+    ca, sa = math.cos(a), math.sin(a)
+    xs, ys = [], []
+    for _, gname, xoff in word.glyphs:
+        bb = word.glyph_bbox(gname)
+        if bb is None:
+            continue
+        for gx in (bb[0], bb[2]):
+            for gy in (bb[1], bb[3]):
+                px, py = s * (xoff + gx), -s * gy              # scale(s, -s)
+                rx, ry = px * ca - py * sa, px * sa + py * ca  # rotate
+                xs.append(x_svg + rx)
+                ys.append(baseline + ry)
+    return (min(xs), min(ys), max(xs), max(ys))
+
+
 def panel(label, ttf, text, base):
     ramblin = Word(ttf, text)
     scale_r = R / ramblin.upm
@@ -250,6 +275,7 @@ def panel(label, ttf, text, base):
         dot_cy = base - bb[3] * 0.92 * scale_r
         dot_r = 0.085 * R
         note = "fallback (no separate tittle)"
+    dot_r -= DOT_SHRINK  # the dot reads better a touch smaller
 
     # "dev": baseline sits at the dot, reading to its right.
     dev = Word(ttf, "dev")
@@ -264,7 +290,8 @@ def panel(label, ttf, text, base):
     r_foot = to_svg(ramblin.extreme(text[0], lambda x, y: x - y))
     n_tip = (n_tip[0], n_tip[1] + N_TIP_DY)
     r_foot = (r_foot[0], r_foot[1] + R_FOOT_DY)
-    path = f'<path d="{trail_path(n_tip, r_foot, base)}" fill="{COL_RAMBLIN}"/>'
+    trail_d, trail_bbox = trail_path(n_tip, r_foot, base)
+    path = f'<path d="{trail_d}" fill="{COL_RAMBLIN}"/>'
 
     dot = f'<circle cx="{dot_cx:.1f}" cy="{dot_cy:.1f}" r="{dot_r:.1f}" fill="{COL_DOT}"/>'
     label_el = f'<text x="{X0}" y="{base - 212:.0f}" class="label">{label.upper()}</text>'
@@ -273,8 +300,23 @@ def panel(label, ttf, text, base):
           f"n_tip=({n_tip[0]:.0f},{n_tip[1]:.0f})  "
           f"r_foot=({r_foot[0]:.0f},{r_foot[1]:.0f})")
 
+    # tight bounding box of the logo: lettering + dev + trail + dot
+    boxes = [
+        word_svg_bbox(ramblin, X0, base, R),
+        word_svg_bbox(dev, dev_x, dot_cy, DEV, DEV_ROTATE),
+        trail_bbox,
+        (dot_cx - dot_r, dot_cy - dot_r, dot_cx + dot_r, dot_cy + dot_r),
+    ]
+    bbox = (min(b[0] for b in boxes), min(b[1] for b in boxes),
+            max(b[2] for b in boxes), max(b[3] for b in boxes))
+
     # path behind the lettering; dot on top
-    return "\n  ".join([label_el, path, g_ramblin, g_dev, dot])
+    logo = "\n  ".join([path, g_ramblin, g_dev, dot])
+    return {
+        "labelled": "\n  ".join([label_el, logo]),
+        "logo": logo,
+        "bbox": bbox,
+    }
 
 
 def verify(svg_path):
@@ -290,14 +332,22 @@ def verify(svg_path):
 
 
 def build():
+    print(f"  palette: ramblin {COL_RAMBLIN} · dev {COL_DEV} · dot {COL_DOT}")
     width = 1100
-    height = BASE0 + (len(PANELS) - 1) * PANEL_H + 220
     panels = []
     for i, (label, fname, text) in enumerate(PANELS):
         ttf = font_path(fname, FONTS[fname])
         panels.append(panel(label, ttf, text, BASE0 + i * PANEL_H))
 
-    svg = f"""<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {width} {height}" role="img" aria-label="ramblin.dev logo composition mockup">
+    # Review mockup: the logo on white, then again on a dark band so the
+    # white-rimmed dot can be checked against a dark background.
+    light_h = BASE0 + (len(PANELS) - 1) * PANEL_H + 220
+    band_h = 320
+    height = light_h + band_h
+    _, by0, _, by1 = panels[0]["bbox"]
+    band_dy = (light_h + band_h / 2) - (by0 + by1) / 2
+
+    mockup = f"""<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {width} {height}" role="img" aria-label="ramblin.dev logo composition mockup">
   <title>ramblin.dev — logo composition mockup (real font outlines)</title>
   <defs>
     <style>
@@ -305,14 +355,31 @@ def build():
     </style>
   </defs>
   <rect width="{width}" height="{height}" fill="#ffffff"/>
+  <rect x="0" y="{light_h}" width="{width}" height="{band_h}" fill="#1e1e22"/>
   <text x="{X0}" y="44" class="label" style="fill:#20424a;font-size:17px">ramblin.dev — logo composition mockup &#183; real font outlines, metric-placed</text>
-  {"".join(chr(10) + "  " + p for p in panels)}
+  {"".join(chr(10) + "  " + p["labelled"] for p in panels)}
+  <text x="{X0}" y="{light_h + 42:.0f}" class="label">ON A DARK BACKGROUND</text>
+  <g transform="translate(0 {band_dy:.1f})">{panels[0]["logo"]}</g>
 </svg>
 """
     with open(OUT, "w") as f:
-        f.write(svg)
+        f.write(mockup)
     print(f"wrote {OUT}")
     verify(OUT)
+
+    # Clean logo: cropped to its bounding box, transparent, no label or title.
+    x0, y0, x1, y1 = panels[0]["bbox"]
+    m = LOGO_MARGIN
+    view = f"{x0 - m:.1f} {y0 - m:.1f} {x1 - x0 + 2 * m:.1f} {y1 - y0 + 2 * m:.1f}"
+    logo_svg = f"""<svg xmlns="http://www.w3.org/2000/svg" viewBox="{view}" role="img" aria-label="ramblin.dev">
+  <title>ramblin.dev</title>
+  {panels[0]["logo"]}
+</svg>
+"""
+    with open(OUT_LOGO, "w") as f:
+        f.write(logo_svg)
+    print(f"wrote {OUT_LOGO}")
+    verify(OUT_LOGO)
 
 
 if __name__ == "__main__":

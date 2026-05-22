@@ -30,8 +30,8 @@ MANIFEST
 output/
 cache/
 
-# Generated logo mockup (rebuild with: uv run design/logo/render_mockup.py)
-design/logo/mockup-script-composition.svg
+# Generated logo SVGs (rebuild with: uv run design/logo/render_logo.py)
+design/logo/*.svg
 
 # PyInstaller
 #  Usually these files are written by a python script from a template
