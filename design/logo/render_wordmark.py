@@ -40,8 +40,9 @@ PANELS = [
 
 
 # Palette: "ramblin" / road, "dev", and the shared dot.
-COL_RAMBLIN = "#E03A4C"  # heart red
-COL_DEV = "#3E9D63"      # green
+COL_RAMBLIN = "#5C3A1E"  # trunk brown (matches mark)
+COL_DEV = "#3E9D63"      # green (matches mark foliage)
+COL_TRAIL = "#ffd79d"    # gravel tan (matches mark trail) — used for the underline flourish
 COL_DOT = "#7C7C82"      # mid grey — meant to read on both white and dark
 
 # Layout constants (SVG px)
@@ -58,6 +59,7 @@ N_TIP_DY = -3         # nudge the n-end connection up (SVG px)
 R_FOOT_DY = 0         # nudge the R-leg connection down (SVG px)
 WORDMARK_MARGIN = 8   # px of breathing room around the cropped wordmark.svg
 DOT_SHRINK = 2        # trim the dot radius by this many SVG px
+RAMBLIN_STROKE_W = 10  # trail-tan outline around the "ramblin" lettering
 
 
 def font_path(name, url):
@@ -101,12 +103,17 @@ class Word:
                 return x + self.hmtx[gname][0]
         return self.advance
 
-    def outline_group(self, x_svg, baseline, size, color, rotate=0):
+    def outline_group(self, x_svg, baseline, size, color, rotate=0,
+                      stroke=None, stroke_width=0):
         scale = size / self.upm
         rot = f" rotate({rotate})" if rotate else ""
+        stroke_attrs = ""
+        if stroke and stroke_width:
+            stroke_attrs = (f' stroke="{stroke}" stroke-width="{stroke_width}"'
+                            f' stroke-linejoin="round" vector-effect="non-scaling-stroke"')
         parts = [
             f'<g transform="translate({x_svg:.2f} {baseline:.2f}){rot} '
-            f'scale({scale:.6f} {-scale:.6f})" fill="{color}">'
+            f'scale({scale:.6f} {-scale:.6f})" fill="{color}"{stroke_attrs}>'
         ]
         for _, gname, x in self.glyphs:
             pen = SVGPathPen(self.glyphset)
@@ -258,7 +265,8 @@ def panel(label, ttf, text, base):
     ramblin = Word(ttf, text)
     scale_r = R / ramblin.upm
 
-    g_ramblin = ramblin.outline_group(X0, base, R, COL_RAMBLIN)
+    g_ramblin = ramblin.outline_group(X0, base, R, COL_RAMBLIN,
+                                       stroke=COL_TRAIL, stroke_width=RAMBLIN_STROKE_W)
 
     # Shared dot, located on the "i" tittle.
     i_gname, i_x = ramblin.glyph_of("i")
@@ -291,7 +299,7 @@ def panel(label, ttf, text, base):
     n_tip = (n_tip[0], n_tip[1] + N_TIP_DY)
     r_foot = (r_foot[0], r_foot[1] + R_FOOT_DY)
     trail_d, trail_bbox = trail_path(n_tip, r_foot, base)
-    path = f'<path d="{trail_d}" fill="{COL_RAMBLIN}"/>'
+    path = f'<path d="{trail_d}" fill="{COL_TRAIL}"/>'
 
     dot = f'<circle cx="{dot_cx:.1f}" cy="{dot_cy:.1f}" r="{dot_r:.1f}" fill="{COL_DOT}"/>'
     label_el = f'<text x="{X0}" y="{base - 212:.0f}" class="label">{label.upper()}</text>'
@@ -332,7 +340,7 @@ def verify(svg_path):
 
 
 def build():
-    print(f"  palette: ramblin {COL_RAMBLIN} · dev {COL_DEV} · dot {COL_DOT}")
+    print(f"  palette: ramblin {COL_RAMBLIN} · dev {COL_DEV} · trail {COL_TRAIL} · dot {COL_DOT}")
     width = 1100
     panels = []
     for i, (label, fname, text) in enumerate(PANELS):
