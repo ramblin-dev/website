@@ -71,6 +71,14 @@ def glyph_r(font):
     return pen.getCommands(), bp.bounds
 
 
+def open_path_ends(path_d):
+    """Modify path to have open ends by removing the close command (Z)."""
+    # Remove trailing Z if present (closes the path)
+    if path_d.strip().endswith('Z'):
+        return path_d.strip()[:-1].strip()
+    return path_d
+
+
 def pine_paths(cx, by, h, w=None):
     """Stylized 3-tier pine — returns (foliage_path, trunk_path) as two
     separate polygons so the trunk can be coloured distinctly from the
@@ -135,8 +143,11 @@ def icon_body(font, trail_col, foliage_col, trunk_col):
     cx, cy = 50, 50
     tx = cx - s * (x0 + x1) / 2
     ty = cy + s * (y0 + y1) / 2
+    # Open the path ends by removing Z and adding stroke with butt caps for crisp open ends
+    d_open = open_path_ends(d)
     letter = (f'<g transform="translate({tx:.3f} {ty:.3f}) '
-              f'scale({s:.5f} {-s:.5f})"><path d="{d}" fill="{trail_col}"/></g>')
+              f'scale({s:.5f} {-s:.5f})"><path d="{d_open}" fill="{trail_col}" '
+              f'stroke="{trail_col}" stroke-width="12" stroke-linecap="butt" stroke-linejoin="round"/></g>')
     # Trees first, letter on top — so any overlap reads as the trail in front.
     return trees_svg(foliage_col, trunk_col) + letter
 
