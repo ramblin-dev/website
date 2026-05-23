@@ -5,10 +5,11 @@
   <title>{% block title %}{{ SITENAME }}{% endblock %}</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="{{ SITEURL }}/theme/style.css">
+  <link rel="icon" href="{{ SITEURL }}/theme/logo/icon-trail.svg" type="image/svg+xml">
 </head>
 <body>
   <main>
-    <h1>{{ SITENAME }}</h1>
+    <a href="{{ SITEURL }}/" class="logo"><img src="{{ SITEURL }}/theme/logo/wordmark.svg" alt="{{ SITENAME }}"></a>
     {% block content %}{% endblock %}
   </main>
   <footer>

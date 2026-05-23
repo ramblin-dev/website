@@ -161,3 +161,20 @@ body {
   from { opacity: 0; }
   to   { opacity: 1; }
 }
+
+/* Site header logo */
+main > a.logo {
+  display: block;
+  margin-bottom: 3rem;
+  border: none;
+}
+
+main > a.logo:hover {
+  opacity: 0.8;
+}
+
+main > a.logo img {
+  display: block;
+  width: 100%;
+  max-width: 500px;
+}
