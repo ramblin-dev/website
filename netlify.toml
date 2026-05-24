@@ -4,3 +4,7 @@ publish = "output"
 
 [build.environment]
 PYTHON_VERSION = "3.12"
+
+# Pings IndexNow (Bing, Yandex, Seznam, Naver, Yep) after each production deploy.
+[[plugins]]
+package = "./netlify/plugins/indexnow"

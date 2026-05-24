@@ -1,0 +1,16 @@
+# ramblin.dev
+
+> A software studio for small, independent projects that lean pro-social — favoring FOSS, transparent development, and business models where the software user is the customer, not the product.
+
+Right now it's solo: Ivan VenOsdel, building software where the user is the customer rather than the product. Default funding is paid subscriptions or licenses plus voluntary support (GitHub Sponsors, Patreon).
+
+"Ramblin'" is meant in the old American sense — a freedom of travel and informal community exchange (Depression-era ramblers, the Guthrie/folk tradition of trading work, songs, and shelter on the road). The site applies that to creative work: a freedom to make what we wish for others, and receive in kind from a community doing the same.
+
+Long-term, if others join: profits prioritize creators first, ramblin.dev second, individual upside third. A 5x pay-ratio cap across the core company applies to total compensation (pay + benefits + equity), hour per hour. The goal for creators is a comfortable full-time living from their own work, not getting rich.
+
+## Pages
+- [Home](https://ramblin.dev/): Who Ivan is, current projects, and how to get update emails.
+- [About](https://ramblin.dev/about/): The name, the long-term plan, the pay-ratio cap, and how to help.
+
+## Projects
+- [Rural Hide + Seek](https://ruralhs.ramblin.dev/): An unofficial fan adaptation of *Jet Lag: The Game*'s Hide + Seek for rural areas without dense transit. Auto-generates a map of "vehicle stations" and uses dice rolls to mimic transit pacing.
