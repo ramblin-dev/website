@@ -12,3 +12,6 @@ fi
 # Sync dependencies and build site
 uv sync --frozen || uv sync
 uv run task build
+
+# Validate indexing files in output/ before deploy. Fails the build on regression.
+uv run scripts/check_indexing.py output

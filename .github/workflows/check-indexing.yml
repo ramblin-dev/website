@@ -1,0 +1,27 @@
+name: Check indexing files
+
+# Validates that sitemap.xml, robots.txt, llms.txt, and the IndexNow key file
+# are reachable and structurally valid on the live ramblin.dev site. Catches
+# regressions unrelated to deploys (CDN config, redirect rules, etc.).
+# The build-time check in uv-shim.sh blocks bad deploys; this catches drift
+# that develops after a good deploy. Action versions are pinned per
+# astral-sh/setup-uv's supply-chain guidance.
+
+on:
+  schedule:
+    - cron: '17 7 * * *'  # 07:17 UTC daily, off the :00 mark
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - 'scripts/check_indexing.py'
+      - '.github/workflows/check-indexing.yml'
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v8.1.0
+      - run: uv sync --frozen
+      - run: uv run scripts/check_indexing.py https://ramblin.dev
