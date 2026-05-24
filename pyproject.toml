@@ -11,6 +11,13 @@ dependencies = [
     "typogrify>=2.1.0",
 ]
 
+# Supply-chain guard: ignore any package version published in the last 16 days.
+# Mitigates malicious releases that get yanked within a couple weeks. Applies
+# at resolution time (`uv lock`, `uv add`, `uv lock --upgrade`); `uv sync`
+# installs from the existing lockfile and is unaffected.
+[tool.uv]
+exclude-newer = "16 days"
+
 [tool.taskipy.tasks]
 build = "pelican content -o output -s publishconf.py"
 serve = "pelican --listen --autoreload"
