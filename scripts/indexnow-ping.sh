@@ -32,7 +32,15 @@ PAYLOAD=$(jq -n \
   '{host: $host, key: $key, keyLocation: $keyloc, urlList: $urls}')
 
 echo "indexnow-ping: submitting ${#URLS[@]} URL(s) for $HOST"
-curl -sS -X POST "$ENDPOINT" \
+HTTP_CODE=$(curl -sS -X POST "$ENDPOINT" \
   -H 'Content-Type: application/json; charset=utf-8' \
   -d "$PAYLOAD" \
-  -w '\nHTTP %{http_code}\n'
+  -w '%{http_code}' \
+  -o /dev/stderr)
+
+echo
+echo "indexnow-ping: HTTP $HTTP_CODE"
+if [[ "$HTTP_CODE" != 2* ]]; then
+  echo "indexnow-ping: submission failed (expected 2xx)" >&2
+  exit 1
+fi
