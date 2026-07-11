@@ -4,7 +4,7 @@ Source for the ramblin.dev website. Static site built with [Pelican](https://get
 
 ## What ramblin.dev is
 
-ramblin.dev is a software studio founded and currently solely owned by Ivan VenOsdel. It is a home for small, independent software projects intended to cross-promote each other and collectively fund continued development.
+ramblin.dev is a small software shop founded and currently solely run by Ivan VenOsdel. It builds small, independent software projects intended to cross-promote each other and collectively fund continued development.
 
 ### The name
 
@@ -16,18 +16,18 @@ Core principles (these should be reflected in site copy and product decisions):
   - **Strong preference for business models where the software user is the customer, not the product.** Models that monetize the user themselves — ad targeting, data resale, attention farming — tend to be anti-social by construction. Default funding model is therefore premium subscriptions/licenses plus voluntary support (GitHub Sponsors, Patreon, etc.) of either a specific product or ramblin.dev itself. This is a preference, not an absolute bar — a future creator with a genuine edge case shouldn't be pushed out over it, but the bar to justify it is high.
   - **Preference for FOSS and transparent development.**
   - **Preference for projects that foster human connection or mental wellbeing.**
-- **Equitable profit sharing (aspirational, for if/when others join).** The canonical short framing is: **creators first, ramblin.dev second, individual upside third.** That's an order of priorities for where a successful project's profits go — every ramblin.dev creator can make a comfortable living doing what they love before profits flow to shared ramblin.dev resources, and individual upside (the creator who brought the success in keeping the rest) comes after both. Getting rich isn't ruled out, it just comes third. Preserve this exact three-part phrasing when editing site copy.
-- **Pay ratio cap (core company only):** no core-company employee earns more than 5x the lowest-paid core-company employee, measured across **pay + benefits + equity** (total compensation, all forms), hour per hour. No loopholes. This cap applies to ramblin.dev the company — it does *not* bound what an individual creator can earn from their own project's success.
-- **Goal for creators:** a comfortable full-time living from their own work, plus shared marketing/promotion infrastructure — not getting rich.
+- **Equitable compensation (aspirational, for if/when others join).** ramblin.dev is a single shop, not a holding company for separate creator-owned businesses — everyone who works here, including Ivan, is paid under one shared compensation structure, not a per-project revenue split.
+- **Pay ratio cap:** no one at ramblin.dev earns more than 5x the lowest-paid person, measured as total compensation per hour worked — (pay + benefits + equity) ÷ hours worked over the compensation period. Comparing hourly rather than annual total is deliberate: it lets part-time staff, contractors, and freelancers fall under the same cap without being penalized for working fewer hours. No loopholes.
+- **Goal:** a comfortable living for everyone doing work they love, plus shared marketing/promotion infrastructure — not getting rich.
 
-Keep these intact when editing copy. If the user asks for shorter/punchier wording, preserve the substance (pro-social bias, voluntary-support default, equitable-sharing, comfortable-not-rich) rather than dropping principles. Don't promote the ad/data-selling preference back into an absolute rule.
+Keep these intact when editing copy. If the user asks for shorter/punchier wording, preserve the substance (pro-social bias, voluntary-support default, single-shop equitable pay cap, comfortable-not-rich) rather than dropping principles. Don't promote the ad/data-selling preference back into an absolute rule.
 
 ## Site structure
 
 - **`/` (landing, `content/pages/index.md`)** — what ramblin.dev is *today*: solo Ivan, his independent software projects, the mailing-list signup, the projects list. Plain-spoken, scannable. The pro-social bullet on this page is framed as *Ivan's personal taste in what to build*, not a policy that would bind a future creator.
-- **`/about`** — broader picture of ramblin.dev: the name, the long-term plans (equitable profit-sharing priority stack, core-company pay-ratio cap), the kinds of projects Ivan wants to build, and how to help. Linked from the landing page; deliberately not the first thing a visitor reads.
+- **`/about`** — broader picture of ramblin.dev: the name, the long-term plans (single-shop equitable compensation, the hourly pay-ratio cap), the kinds of projects Ivan wants to build, and how to help. Linked from the landing page; deliberately not the first thing a visitor reads.
 
-When editing copy, keep this split intact — don't pull aspirational/multi-creator material onto the landing page, and don't reduce the landing-page pro-social paragraph to bare personal preference without the substance (user-as-customer, FOSS, human connection, mental health).
+When editing copy, keep this split intact — don't pull aspirational/long-term material onto the landing page, and don't reduce the landing-page pro-social paragraph to bare personal preference without the substance (user-as-customer, FOSS, human connection, mental health).
 
 ## Repo layout
 

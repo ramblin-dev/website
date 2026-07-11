@@ -1,6 +1,6 @@
 Title: About
 Date: 2026-05-16
-Modified: 2026-05-18
+Modified: 2026-07-11
 Category: general
 save_as: about/index.html
 URL: about/
@@ -20,15 +20,9 @@ I am hoping ramblin.dev can help with that.
 
 ## My pie in the sky dream for ramblin.dev
 
-Right now ramblin.dev is just me, but if it grows, the plan is to bring other creators in and share the upside. 
+Right now ramblin.dev is just me, but my dream is to grow with an equitable ethos at its core.
 
-In short, our project's profits would be distributed as follows:
-
-1. **Creators first**. Every ramblin.dev creator should be able to make a comfortable living doing what they love.
-2. **ramblin.dev second**. The shared resources that make it easier for ramblin.dev creators to launch and find an audience.
-3. **Whatever you like third**. Once the essentials are taken care of, creators spend the rest how they like.
-
-This same ethos would apply to the core company as well. Specifically: no one would be paid more than 5x the lowest-paid person — hour per hour, across all forms of compensation. (*The US average is 350x*).
+Specifically: no one would be paid more than 5x the lowest-paid person — hour per hour, across all forms of compensation. (*The US average is 350x*.)
 
 ## What I want to build
 

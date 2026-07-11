@@ -59,4 +59,4 @@ A page (or landing-page section) listing published ramblin.dev projects. Many wi
 - Blog/article publishing pipeline (no posts planned yet; `content/content/` stays empty).
 - User accounts on ramblin.dev itself (accounts belong to individual products).
 - Social media presence beyond email.
-- Multi-creator onboarding flows / profit-sharing tooling (aspirational; revisit when a second creator is actually joining).
+- Hiring/onboarding flows (aspirational; revisit if ramblin.dev ever grows beyond solo).
